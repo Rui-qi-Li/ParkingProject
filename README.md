@@ -1,24 +1,10 @@
-# README
+# ParkingProject
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The internship project for Parkpnp summer internship 2018
 
-Things you may want to cover:
+Backend Environment
+* Ruby on Rails
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
