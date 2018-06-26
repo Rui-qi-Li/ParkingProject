@@ -1,0 +1,59 @@
+<% render 'nav' %>
+<h2>checkout</h2>
+<div class="card" style="width: 28rem;">
+  <div class="card-body">
+    <h5 class="card-title">Parking name: <span class="name"></span></h5>
+    <h5 class="card-title">Parking address: <span class="address"><%= params[:address].replace(params[:address].gsub('-',' ')) %></span></h5>
+    <h5 class="card-title">Parking hours: <span class="hour"></span></h5>
+    <h5 class="card-title">Total cost: <i class="fa fa-euro"></i><span class="cost"></span></h5>
+    <!-- charge form -->
+    <%= form_tag "/parking/users/booking" do %>
+      <%= hidden_field_tag 'stripeToken' %>
+      <%= hidden_field_tag 'name' %>
+      <%= hidden_field_tag 'address' %>
+      <%= hidden_field_tag 'hour' %>
+      <%= hidden_field_tag 'cost' %>
+    <% end %>
+
+    <button id="chargeBtn" class="btn btn-primary btn-block">Request to Book</button>
+  </div>
+</div>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+  $('.hour').text(Cookies.get('places-hour'))
+  $('.name').text(Cookies.get('places-name'))
+  var cost = Math.round(parseFloat( Cookies.get('places-cost') ) * parseFloat( Cookies.get('places-hour'))*100)/100;
+  $('.cost').text(cost)
+
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_1rVTFDtrSIbleLpJjwLDpu23',
+    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+    locale: 'auto',
+    name: 'Demo Site',
+    description: '2 widgets',
+    currency: 'eur',
+    description:'parking place booking fee',
+    amount: cost*100,
+    allowRememberMe: false,
+    panelLabel: "Pay",
+    token: function(token) {
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+      $('#stripeToken').val(token.id);
+      $('#cost').val(cost*100);
+      $('#name').val($('.name').text())
+      $('#address').val($('.address').text())
+      $('#hour').val($('.hour').text())
+      $('form').submit();
+    }
+  });
+    $('#chargeBtn').on('click',function(e){
+      handler.open();
+      e.preventDefault();
+    })
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+</script>

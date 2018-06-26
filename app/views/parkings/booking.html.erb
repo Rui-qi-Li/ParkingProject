@@ -1,0 +1,29 @@
+<% render 'nav' %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">BOOKING</th>
+          <th scope="col">Charge ID</th>
+          <th scope="col">Charge Time</th>
+          <th scope="col">Parking Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Hours</th>
+          <th scope="col">Costs</th>
+          <th scope="col">Booking Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |item| %>
+        <tr>
+          <th scope="row">1</th>
+          <td><%= item.charge_id %></td>
+          <td><%= item.created_at %></td>
+          <td><%= item.name %></td>
+          <td><%= item.address %></td>
+          <td><%= item.hour %></td>
+          <td><i class="fa fa-euro"></i><%= (item.cost.to_f)/100 %></td>
+          <td><%= item.charge_email %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>

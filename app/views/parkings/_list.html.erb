@@ -1,0 +1,19 @@
+<% @results.each do |item| %>
+    <ul class="list-group">
+      <li class="list-group-item"><%= link_to item['name'] , address_path(item['vicinity'].parameterize), class:'place-name' %></li>
+      <% unless item['rating'] %>
+      <%  item['rating'] = '2' %>
+        <li class="list-group-item">From <i class="fa fa-euro"></i><span><%= item['rating'] %></span> per hour</li>
+      <% else %>
+        <li class="list-group-item">From <i class="fa fa-euro"></i><span><%= item['rating'] %></span> per hour</li>
+      <% end %>
+        <li class="list-group-item"><%= item['vicinity'] %></li>
+    </ul>
+    <br/>
+<% end %>
+<script>
+$('.place-name').on('click',function(){
+  Cookies.set('places-name', $(this).text());
+  Cookies.set('places-cost', $(this).parent().next().find("span").text());
+})
+</script>

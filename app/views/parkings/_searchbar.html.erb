@@ -1,0 +1,5 @@
+<% if @query %>
+<%= text_field_tag 'search', @query[:address], class:'form-control', placeholder:'Where you want to park?' %>
+<% else %>
+<%= text_field_tag 'search', nil, class:'form-control', placeholder:'Where you want to park?' %>
+<% end %>

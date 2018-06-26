@@ -1,0 +1,35 @@
+<% render 'nav' %>
+<div class="container">
+  <h2 class="mt-4">Parking place in <span class="place-name"><%= @name %></span></h2>
+  <p><%= @address %></p>
+  <p><i class="fa fa-euro"></i><span class="place-cost"></span> per hour</p>
+  <div class="card ml-auto" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Select Parking hours</h5>
+      <select class="mb-4 w-100 selection">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+        <option value="24">24</option>
+      </select>
+      <a href="<%= request.original_url %>/checkout" class="btn btn-primary btn-block bookBtn">Booking now!</a>
+    </div>
+  </div>
+  <h2>google map here</h2>
+</div>
+<script>
+  $('.place-name').text(Cookies.get('places-name'))
+  $('.place-cost').text(Cookies.get('places-cost'))
+  $('.bookBtn').on('click',function(){
+    Cookies.set('places-hour', $('.selection').val());
+    Cookies.set('places-cost', $('.place-cost').text());
+  })
+</script>

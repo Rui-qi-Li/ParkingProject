@@ -1,0 +1,23 @@
+<% render 'nav' %>
+<div class="container">
+  <div class="row mt-4">
+  <div class="col-4">
+    <!--  search area -->
+    <%= render 'searchbar' %>
+    <!-- results area -->
+    <% if @results.any? %>
+      <br/>
+      <%= render 'list' %>
+    <% else %>
+      <h3>No available parking spaces found...</h3>
+      <p>We couldn't find any parking spaces. Try a different location?</p>
+    <% end %>
+  </div>
+  <!-- map area -->
+  <div class="col-8">
+    <h2>google map here</h2>
+    <div id="googleMap" style="height:400px;">
+    </div>
+  </div>
+</div>
+</div>
