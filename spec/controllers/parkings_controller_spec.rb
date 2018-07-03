@@ -9,10 +9,11 @@ RSpec.describe ParkingsController, type: :controller do
   end # describe
 
   describe 'GET #index #booking' do
-
-    it "return the search result list page" do
-      user = create(:user)
-      sign_in user
+      before (:all) do
+        @user = create(:user)
+      end
+    it "return the search result to logined user" do
+      sign_in @user
       get :index, params:{ search: {
         address:'Palmerstown, Johnstown, Co. Kildare, Ireland',
         lat: '53.2370579',
@@ -21,9 +22,8 @@ RSpec.describe ParkingsController, type: :controller do
       }
       expect(response).to be_success
     end
-    it "return booking record" do
-      user = create(:user)
-      sign_in user
+    it "return booking record to logined user" do
+      sign_in @user
       get :booking
       expect(response).to be_success
     end
