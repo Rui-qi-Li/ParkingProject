@@ -16,5 +16,6 @@
 #
 
 class Booking < ApplicationRecord
+  validates_presence_of :name, :cost, :address, :hour, :charge_email, :charge_id
   belongs_to :user
 end
